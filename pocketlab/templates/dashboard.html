@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>PocketLab dashboard</h1>
+<div class="cards">
+  <div class="card">
+    <h2>Total spend</h2>
+    <p>${{ '%.2f' % summary.total_spend }}</p>
+  </div>
+  <div class="card">
+    <h2>Average expense</h2>
+    <p>${{ '%.2f' % summary.average_expense }}</p>
+  </div>
+  <div class="card">
+    <h2>Largest category</h2>
+    <p>{{ summary.top_category }}</p>
+  </div>
+</div>
+{% endblock %}

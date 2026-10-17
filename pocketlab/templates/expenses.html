@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Recent expenses</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Category</th>
+      <th>Amount</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in expenses %}
+    <tr>
+      <td>{{ item.date }}</td>
+      <td>{{ item.category }}</td>
+      <td>${{ '%.2f' % item.amount }}</td>
+      <td>{{ item.description }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
