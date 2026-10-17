@@ -36,6 +36,39 @@ body {
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
+.expense-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.expense-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-weight: 600;
+}
+
+.expense-form input,
+.expense-form button {
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #d5dae3;
+}
+
+.expense-form button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  align-self: end;
+  cursor: pointer;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
