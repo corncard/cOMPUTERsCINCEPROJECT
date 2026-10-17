@@ -34,6 +34,24 @@ def init_db(db_path: str | Path | None = None):
         conn.close()
 
 
+def insert_expense(date, category, amount, description="", db_path: str | Path | None = None):
+    """Insert a single expense into the database and return the saved row."""
+    conn = connect_db(db_path)
+    try:
+        cursor = conn.execute(
+            "INSERT INTO expenses (date, category, amount, description) VALUES (?, ?, ?, ?)",
+            (str(date), str(category).strip(), float(amount), str(description or "")),
+        )
+        conn.commit()
+        row = conn.execute(
+            "SELECT id, date, category, amount, description FROM expenses WHERE id = ?",
+            (cursor.lastrowid,),
+        ).fetchone()
+    finally:
+        conn.close()
+    return dict(row) if row else {}
+
+
 def seed_database(csv_path: str | Path | None = None, db_path: str | Path | None = None):
     """Populate the SQLite database with expenses from the CSV file."""
     from .analytics import load_expenses
@@ -62,7 +80,7 @@ def load_expenses_from_db(db_path: str | Path | None = None):
     conn = connect_db(db_path)
     try:
         rows = conn.execute(
-            "SELECT date, category, amount, description FROM expenses ORDER BY date"
+            "SELECT id, date, category, amount, description FROM expenses ORDER BY date DESC, id DESC"
         ).fetchall()
     finally:
         conn.close()
