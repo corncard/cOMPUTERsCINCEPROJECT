@@ -17,4 +17,6 @@ PocketLab is a lightweight expense dashboard built around a CSV-backed analysis 
 - `pocketlab/analytics.py` performs cleaning and aggregate calculations.
 - `pocketlab/insights.py` creates summary insights, compares the latest month with the prior month, and measures budget use against the latest month's spend.
 - `pocketlab/charts.py` generates plots.
+- `pocketlab/ml/` builds spending profiles and clusters similar periods.
+- `notebooks/03_machine_learning.ipynb` demonstrates the exploratory clustering workflow.
 - `app.py` exposes the Flask dashboard routes.
