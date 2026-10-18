@@ -1,0 +1,4 @@
+/data/pocketlab.db
+__pycache__/
+.ipynb_checkpoints/
+/static/generated/*.png
