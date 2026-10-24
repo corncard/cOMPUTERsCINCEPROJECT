@@ -1,0 +1,20 @@
+{% macro strip(categories) %}
+  {% set grand = categories|sum(attribute='total') %}
+  {% if grand %}
+  <div class="strip" role="img" aria-label="Spending share by category">
+    {% for row in categories %}
+    <span class="s{{ (loop.index0 % 6) + 1 }}" style="width: {{ '%.2f' % (row.total / grand * 100) }}%"></span>
+    {% endfor %}
+  </div>
+  <ul class="legend">
+    {% for row in categories %}
+    <li>
+      <i class="s{{ (loop.index0 % 6) + 1 }}"></i>
+      <span>{{ row.category }}</span>
+      <span class="num">${{ '%.2f' % row.total }}</span>
+      <span class="share num">{{ '%.0f' % (row.total / grand * 100) }}%</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+{% endmacro %}

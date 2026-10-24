@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% from '_strip.html' import strip %}
+{% block content %}
+<header class="intro">
+  <h1>You've spent ${{ '%.2f' % summary.total_spend }}</h1>
+  <p>Most of it went to {{ summary.top_category }}.</p>
+</header>
+
+<dl class="figures">
+  <div class="figure"><dt>Total spend</dt><dd class="num">${{ '%.2f' % summary.total_spend }}</dd></div>
+  <div class="figure"><dt>Average expense</dt><dd class="num">${{ '%.2f' % summary.average_expense }}</dd></div>
+  <div class="figure"><dt>Largest category</dt><dd>{{ summary.top_category }}</dd></div>
+</dl>
+
+{% if categories %}
+<h2>Where it went</h2>
+{{ strip(categories) }}
+{% endif %}
+{% endblock %}

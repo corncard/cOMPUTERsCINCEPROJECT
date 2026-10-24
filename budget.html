@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% from '_strip.html' import strip %}
+{% block content %}
+<header class="intro">
+  <h1>Spending by category</h1>
+  <p>{{ summary.transaction_count }} transactions totaling ${{ '%.2f' % summary.total_spend }}.</p>
+</header>
+
+{% if categories %}
+{{ strip(categories) }}
+{% else %}
+<p class="empty">No spending yet. Add an expense to see your categories.</p>
+{% endif %}
+{% endblock %}
