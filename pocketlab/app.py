@@ -8,7 +8,7 @@ from pocketlab.db import init_db, insert_expense, load_expenses_from_db, seed_da
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.config["TITLE"] = APP_TITLE
-
+#test
 
 def ensure_database_seeded():
     init_db(DB_PATH)
