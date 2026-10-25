@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Recent expenses</h1>
+<header class="intro">
+  <h1>Expenses</h1>
+</header>
 
 <form id="expense-form" class="expense-form">
   <label>
@@ -16,30 +18,33 @@
     <input type="number" name="amount" step="0.01" min="0" placeholder="0.00" required>
   </label>
   <label>
-    Description
-    <input type="text" name="description" placeholder="Optional note">
+    Note
+    <input type="text" name="description" placeholder="Optional">
   </label>
   <button type="submit">Add expense</button>
 </form>
 
-<table>
-  <thead>
-    <tr>
-      <th>Date</th>
-      <th>Category</th>
-      <th>Amount</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody id="expense-table-body">
-    {% for item in expenses %}
-    <tr data-id="{{ item.id }}">
-      <td>{{ item.date }}</td>
-      <td>{{ item.category }}</td>
-      <td>${{ '%.2f' % item.amount }}</td>
-      <td>{{ item.description or '' }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Category</th>
+        <th class="amount">Amount</th>
+        <th>Note</th>
+      </tr>
+    </thead>
+    <tbody id="expense-table-body">
+      {% for item in expenses %}
+      <tr data-id="{{ item.id }}">
+        <td class="num">{{ item.date }}</td>
+        <td>{{ item.category }}</td>
+        <td class="amount">${{ '%.2f' % item.amount }}</td>
+        <td>{{ item.description or '' }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if not expenses %}<p class="empty">No expenses yet. Add your first one above.</p>{% endif %}
+</div>
 {% endblock %}

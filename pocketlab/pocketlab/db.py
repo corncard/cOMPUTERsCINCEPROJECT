@@ -85,3 +85,20 @@ def load_expenses_from_db(db_path: str | Path | None = None):
     finally:
         conn.close()
     return [dict(row) for row in rows]
+
+
+
+
+def delete_expense(expense_id: int, db_path: str | Path | None = None) -> bool:
+    """Delete one expense by ID. Return True if a row was deleted."""
+    conn = connect_db(db_path)
+    try:
+        cursor = conn.execute(
+            "DELETE FROM expenses WHERE id = ?",
+            (int(expense_id),),
+        )
+        conn.commit()
+        return cursor.rowcount > 0
+    finally:
+        conn.close()
+

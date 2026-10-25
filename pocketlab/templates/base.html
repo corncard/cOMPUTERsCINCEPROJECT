@@ -3,14 +3,18 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ title }}</title>
+    <title>{{ title or 'PocketLab' }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   </head>
   <body>
-    <nav class="nav">
-      <a href="{{ url_for('dashboard') }}">Dashboard</a>
-      <a href="{{ url_for('expenses') }}">Expenses</a>
-      <a href="{{ url_for('budget') }}">Budget</a>
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="{{ url_for('dashboard') }}">PocketLab</a>
+      <a href="{{ url_for('dashboard') }}" {% if request.endpoint == 'dashboard' %}aria-current="page"{% endif %}>Dashboard</a>
+      <a href="{{ url_for('expenses') }}" {% if request.endpoint == 'expenses' %}aria-current="page"{% endif %}>Expenses</a>
+      <a href="{{ url_for('budget') }}" {% if request.endpoint == 'budget' %}aria-current="page"{% endif %}>Budget</a>
     </nav>
     <main class="container">
       {% block content %}{% endblock %}

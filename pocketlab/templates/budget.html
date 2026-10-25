@@ -1,19 +1,14 @@
 {% extends 'base.html' %}
+{% from '_strip.html' import strip %}
 {% block content %}
-<h1>Budget overview</h1>
-<div class="cards">
-  <div class="card">
-    <h2>Budget</h2>
-    <p>${{ '%.2f' % summary.total_spend }}</p>
-  </div>
-  <div class="card">
-    <h2>Transactions</h2>
-    <p>{{ summary.transaction_count }}</p>
-  </div>
-</div>
-<ul>
-  {% for row in categories %}
-  <li>{{ row.category }}: ${{ '%.2f' % row.total }}</li>
-  {% endfor %}
-</ul>
+<header class="intro">
+  <h1>Spending by category</h1>
+  <p>{{ summary.transaction_count }} transactions totaling ${{ '%.2f' % summary.total_spend }}.</p>
+</header>
+
+{% if categories %}
+{{ strip(categories) }}
+{% else %}
+<p class="empty">No spending yet. Add an expense to see your categories.</p>
+{% endif %}
 {% endblock %}
